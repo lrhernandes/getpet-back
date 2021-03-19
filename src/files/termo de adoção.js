@@ -1,0 +1,10 @@
+module.exports = {
+    termo (){
+        const str = `TERMO DE ADOÇÃO DE ANIMAIS DE ESTIMAÇÃO ATRAVÉS DA PLATAFORMA GETPET
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce hendrerit id lectus et convallis. Vivamus egestas, justo ut mattis mollis, metus ipsum fringilla sem, ut mattis mauris libero at enim. Donec pellentesque lacus at purus lacinia iaculis. Aenean vel semper sem, in dignissim sem. Integer sed nunc accumsan, faucibus erat non, semper enim. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Quisque venenatis nunc est, ut posuere elit dignissim ut. Nam ultrices dui urna, eget hendrerit massa dictum at. In hac habitasse platea dictumst. Curabitur elit lorem, dignissim vel accumsan ac, euismod nec nunc. In placerat lobortis rutrum. Quisque ornare nunc risus, ac sagittis ante dignissim vitae. Pellentesque mauris mi, semper nec fringilla auctor, sagittis quis est. Donec quis pulvinar massa, eu aliquam sapien. Vivamus eleifend odio metus, vitae hendrerit erat dignissim vel
+        Cras sit amet velit posuere, efficitur magna nec, finibus libero. Proin blandit, lorem at auctor consequat, justo diam accumsan leo, porttitor congue enim purus rhoncus nibh. Curabitur quis mi rhoncus sapien blandit efficitur at nec mi. Curabitur auctor, sapien sit amet venenatis ultricies, tellus sapien laoreet leo, euismod facilisis tellus sapien et nulla. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Fusce vel nibh leo. Sed nibh leo, consequat sed consectetur eget, consectetur a lacus.
+        Vivamus condimentum ullamcorper ipsum nec aliquam. Aliquam risus tortor, dignissim vitae quam sed, hendrerit consequat tellus. Vivamus sagittis orci nec imperdiet fermentum. Maecenas placerat ut enim eu viverra. Suspendisse posuere viverra lacinia. Donec eget finibus dolor, id aliquam nunc. Donec tempor ultrices urna, vel fermentum mi varius ac. Nam sed ultricies massa. Pellentesque ut iaculis elit. Curabitur ac neque diam. Nulla commodo placerat est eu rutrum.`
+
+        return str;
+    }
+}
