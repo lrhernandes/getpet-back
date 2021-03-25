@@ -31,8 +31,6 @@ module.exports = {
             this.newPassword(cli.firstName, rawPassword, email)
         });
 
-
-
         return cli;
     },
     

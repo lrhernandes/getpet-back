@@ -2,19 +2,57 @@
 const express = require('express');
 const routes = express.Router();
 const connection = require('./database/connection');
+const { Router } = require('express');
+const multer = require('multer')
+const multerConfig = require('./config/multer')
+const fs = require('fs');
+const path = require('path');
+const {promisify} = require('util')
 
 //CONTROLLERS
 const AuthController = require('./controllers/AuthController');
 const ClientController = require('./controllers/ClientController');
 const AnnouncementController = require('./controllers/AnnouncementController');
 const FavouriteAnnouncementsController = require('./controllers/FavouriteAnnouncementsController');
-const { Router } = require('express');
+const { fileFilter } = require('./config/multer');
+
 
 //ROTA RAIZ
 routes.get('/', (req, res)=>{
     return res.json({
     });
 });
+
+//ROTA DE UPLOAD DE IMAGENS
+routes.post("/img/:announcementId", multer(multerConfig).single('file'), async (req, res) => {
+    const id = req.params.announcementId;
+    const url = `${process.env.APP_URL}files/${req.file.filename}`;
+    const data = {
+        name: req.file.originalname,
+        size: req.file.size,
+        url: url,
+        key: req.file.filename,
+        announcementId: id
+    }
+    const picture = await connection.uploads.create(data);
+    return res.json(picture);
+})
+routes.get("/img/:announcementId", async (req, res) => {
+    const id = req.params.announcementId;
+    const pictures = await connection.uploads.findAll({ where: { announcementId: id }});
+    return res.json(pictures);
+})
+routes.delete("/img/:id", async (req, res) => {
+    const id = req.params.id;
+    const picture = await connection.uploads.findOne({ where: { id: id }});
+    await connection.uploads.destroy({ where: { id: id }}).then(()=>{
+        promisify(fs.unlink)(path.resolve(__dirname, "..", "tmp", "uploads", picture.key))
+        return res.json("Imagem deletada");
+    }).cathc((err)=>{return res.json(err)})
+})
+
+//https://getpet-back.herokuapp.com/
+
 
 //ROTAS DE AUTENTICACAO]
 routes.post('/auth/login', AuthController.login);
