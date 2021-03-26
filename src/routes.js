@@ -51,13 +51,6 @@ routes.delete("/img/:id", async (req, res) => {
     }).cathc((err)=>{return res.json(err)})
 })
 
-//https://getpet-back.herokuapp.com/
-
-// routes.post('/adopter/:announcementId', async (req, res) => {
-    
-// })
-
-
 //ROTAS DE AUTENTICACAO]
 routes.post('/auth/login', AuthController.login);
 
