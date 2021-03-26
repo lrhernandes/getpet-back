@@ -189,8 +189,7 @@ module.exports = {
             adopted: false,
             pictures: ''
         });
-        //const newannouncement = this.register(userId, adressId, name, description, type, size, sex, age);
-        return announcement;
+        return announcement.id;
     },
 
     //ENVIAE EMAIL DA INSERÇÃO DE ANÚNCIO
