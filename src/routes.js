@@ -27,6 +27,7 @@ routes.get('/', (req, res)=>{
 routes.post("/img/:announcementId", multer(multerConfig).single('file'), async (req, res) => {
     const id = req.params.announcementId;
     const url = `${process.env.APP_URL}files/${req.file.filename}`;
+    console.log(process.env.APP_URP)
     const data = {
         name: req.file.originalname,
         size: req.file.size,
