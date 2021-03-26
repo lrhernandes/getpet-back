@@ -1,7 +1,7 @@
 //REQUISIÇÕES
 const connection = require ('../database/connection');
 const strTermo = require('../files/termo de adoção');
-const strEmail = require('../mail templates/announcement');
+const strEmail = require('../mail templates/adopted');
 const nodemailer = require('nodemailer');
 const { Op } = require("sequelize");
 
@@ -118,7 +118,7 @@ module.exports = {
     
     //ATUALIZAR ANÚNCIOS
     async update(req, id_par_ann){
-        const { name, description, sex, age, vaccinated, dewormed, castrated, isSpecial, specialDescription, temperament, adopted, type, uf, city, size, available} = req;
+        const { name, description, sex, age, vaccinated, dewormed, castrated, isSpecial, specialDescription, temperament, adopted, type, uf, city, size, available, adopterName, adopterDescription, adopterPhone} = req;
         const ann = await connection.announcement.findOne({ where:{ id: id_par_ann }});
         if(name){ ann.name = name;};
         if(description){ ann.description = description; };
@@ -135,12 +135,12 @@ module.exports = {
         if(castrated){ ann.castrated = castrated}
         if(isSpecial){ ann.isSpecial = isSpecial}
         if(specialDescription){ ann.specialDescription = specialDescription}
-        if(adopted){ ann.adopted = adopted}
-        console.log(vaccinated)
-        console.log(dewormed)
-        console.log(isSpecial)
-        console.log(castrated)
-        console.log(specialDescription)
+        if(adopted){ 
+            ann.adopted = adopted;
+            ann.available = false;
+            this.handleAdopter(adopterName, adopterPhone, adopterDescription, id_par_ann);
+            this.adopted(adopterName, adopterPhone, adopterDescription, ann.userId, ann.name);
+        }
 
         const announcement = await ann.save({
             name: name,
@@ -164,6 +164,17 @@ module.exports = {
         
         console.log(announcement)
         return announcement;
+    },
+
+    async handleAdopter(name, phone,description, id){
+        const data = {
+            name: name,
+            phone: phone,
+            description: description,
+            announcementId: id
+        }
+        const adopter = await connection.adopters.create(data);
+        return res.json(adopter);
     },
 
     //SALVAR ANNOUNCEMENT NO BANCO
@@ -193,19 +204,14 @@ module.exports = {
     },
 
     //ENVIAE EMAIL DA INSERÇÃO DE ANÚNCIO
-    async register(userId, adressId, name, description, type, size, sex, age) {
+    async adopted(adopterName, adopterPhone, adopterDescription, userId, announcementName) {
         //client
         const user = await connection.client.findOne({where: { id: userId}});
         const jsonP = JSON.parse(JSON.stringify(user.dataValues));
         const {firstName, email} = jsonP;
 
-        //address
-        const address = await connection.adress.findOne({where: {id: adressId}});
-        const jsonP2 = JSON.parse(JSON.stringify(address.dataValues));
-        const {street, houseNumber, city, uf} = jsonP2;
-
         const termo = strTermo.termo();
-        const mail = strEmail.registerAnnouncement(firstName, name, description, type, size, sex, age, street, houseNumber, city, uf);
+        const mail = strEmail.adopted(firstName, announcementName, adopterDescription, adopterName, adopterPhone);
         
         let transporter = nodemailer.createTransport({
             host: "smtp.gmail.com",
@@ -220,8 +226,8 @@ module.exports = {
         let info = transporter.sendMail({
             from: '"GetPet 🐶🐭" <getpetcc@gmail.com>',
             to: `${email}, larachernandes@gmail.com, getpetcc@gmail.com`,
-            subject: `Novo anúncio!`,
-            text: "Mensagem de confirmação de registro", 
+            subject: `Oba, seu pet foi adotado!`,
+            text: "Mensagem de confirmação de adoção", 
             html: `${mail}`, // salvo em src/mail templates
             attachments : [{ filename: 'termo.txt', content: termo }] //salvo em src/files
             });

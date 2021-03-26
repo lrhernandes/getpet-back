@@ -18,6 +18,7 @@ db.client = require('../database/models/ClientModel')(sequelize, Sequelize);
 db.announcement = require('../database/models/AnnouncementModel')(sequelize, Sequelize);
 db.favouriteAnnouncements = require('../database/models/FavouriteAnnouncements')(sequelize, Sequelize);
 db.uploads = require('../database/models/Uploads')(sequelize, Sequelize);
+db.adopters = require('../database/models/Adopters')(sequelize, Sequelize);
 
 //db.favouriteAnnouncements.hasOne(db.announcement);
 
