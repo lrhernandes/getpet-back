@@ -2,8 +2,13 @@
 const Sequelize = require('sequelize');
 
 //CONEXÃO
-const sequelize = new Sequelize('sql10401617', 'sql10401617', 'SmryEcFIF7', {
-    host: 'sql10.freesqldatabase.com',
+// const sequelize = new Sequelize('sql10401617', 'sql10401617', 'SmryEcFIF7', {
+//     host: 'sql10.freesqldatabase.com',
+//     dialect: 'mysql'
+// });
+
+const sequelize = new Sequelize('getpet', 'root', '1123Bd?', {
+    host: 'localhost',
     dialect: 'mysql'
 });
 

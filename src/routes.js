@@ -23,6 +23,8 @@ routes.get('/', (req, res)=>{
     });
 });
 
+//https://getpet-back.herokuapp.com/
+
 //ROTA DE UPLOAD DE IMAGENS
 routes.post("/img/:announcementId", multer(multerConfig).single('file'), async (req, res) => {
     const id = req.params.announcementId;

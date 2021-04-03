@@ -109,7 +109,7 @@ module.exports = {
             secure: true, // true for 465, false for other ports
             auth: {
               user: "getpetcc@gmail.com", 
-              pass: "getpet1123" 
+              pass: "deletarsenha" 
             },
             tls:{ rejectUnauthorized: false} //localhost
         });
@@ -133,7 +133,7 @@ module.exports = {
             secure: true, // true for 465, false for other ports
             auth: {
               user: "getpetcc@gmail.com", 
-              pass: "getpet1123" 
+              pass: "deletarsenha" 
             },
             tls:{ rejectUnauthorized: false} //localhost
         });
@@ -156,7 +156,7 @@ module.exports = {
             secure: true, // true for 465, false for other ports
             auth: {
               user: "getpetcc@gmail.com", 
-              pass: "getpet1123" 
+              pass: "deletarsenha" 
             },
             tls:{ rejectUnauthorized: false} //localhost
         });

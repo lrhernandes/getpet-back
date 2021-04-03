@@ -161,8 +161,7 @@ module.exports = {
             specialDescription: specialDescription,
             adopted:adopted
         })
-        
-        console.log(announcement)
+
         return announcement;
     },
 
@@ -174,7 +173,7 @@ module.exports = {
             announcementId: id
         }
         const adopter = await connection.adopters.create(data);
-        return res.json(adopter);
+        return adopter;
     },
 
     //SALVAR ANNOUNCEMENT NO BANCO
@@ -219,7 +218,7 @@ module.exports = {
             secure: true, // true for 465, false for other ports
             auth: {
               user: "getpetcc@gmail.com", 
-              pass: "getpet1123" 
+              pass: "deletarsenha" 
             },
             tls:{ rejectUnauthorized: false} //localhost
         });
