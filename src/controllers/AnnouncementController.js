@@ -79,6 +79,7 @@ module.exports = {
     async create (req, res) {
         const ad = await announcement.create(req.body);
         if(ad){
+            console.log(ad)
             return res.send(ad).status(201).send();
         }else{
             return res.status(400).send('Error in insert new record');

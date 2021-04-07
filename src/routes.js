@@ -38,6 +38,7 @@ routes.post("/img/:announcementId", multer(multerConfig).single('file'), async (
         announcementId: id
     }
     const picture = await connection.uploads.create(data);
+    console.log(id, url, data, picture)
     return res.json(picture);
 })
 routes.get("/img/:announcementId", async (req, res) => {

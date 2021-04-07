@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
             }
         },
         description: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allownull: false,
             validate: {
                 max: { args: 1100, msg: "Descrição deve ter no máximo 1100 caracteres" }
